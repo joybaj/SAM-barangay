@@ -1,0 +1,42 @@
+CREATE DATABASE SAMChatbot
+
+USE SAMChatbot
+
+CREATE TABLE [Role]
+(
+	RoleID NUMERIC NOT NULL
+	CONSTRAINT RoleID PRIMARY KEY 
+	,RoleName CHAR NOT NULL
+);
+
+CREATE TABLE [Login] 
+(
+	Username CHAR NOT NULL
+	CONSTRAINT Username PRIMARY KEY
+	,[Password] CHAR NOT NULL
+	,RoleID NUMERIC NOT NULL
+	FOREIGN KEY (RoleID)
+	REFERENCES [Role] (RoleID)
+);
+
+CREATE TABLE [User]
+(
+	UserID NUMERIC NOT NULL
+	CONSTRAINT UserID PRIMARY KEY
+	,[User_Name] CHAR NOT NULL
+	,User_Email CHAR NOT NULL
+	,Username CHAR NOT NULL
+	FOREIGN KEY (Username)
+	REFERENCES [Login] (Username)
+);
+
+CREATE TABLE [Admin]
+(
+	AdminID Numeric NOT NULL
+	CONSTRAINT AdminID PRIMARY KEY
+	,Admin_Name CHAR NOT NULL
+	,Admin_Email CHAR NOT NULL
+	,Username CHAR NOT NULL
+	FOREIGN KEY (Username)
+	REFERENCES [Login] (Username)
+);
